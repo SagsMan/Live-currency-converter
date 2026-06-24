@@ -12,16 +12,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Deploy to Vercel
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Deploy to Vercel (production)
         env:
-          VERCEL_TOKEN:      ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_TEAM_ID:    ${{ secrets.VERCEL_TEAM_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          npm install -g vercel@latest
-          vercel pull --yes --environment=production \
-            --token=$VERCEL_TOKEN \
-            --scope=$VERCEL_TEAM_ID
-          vercel deploy --prebuilt --prod \
-            --token=$VERCEL_TOKEN \
-            --scope=$VERCEL_TEAM_ID
+          vercel deploy --prod --yes --token=$VERCEL_TOKEN
