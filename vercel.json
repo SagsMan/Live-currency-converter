@@ -1,8 +1,10 @@
 {
   "builds": [
+    { "src": "logo.png", "use": "@vercel/static" },
     { "src": "index.php", "use": "vercel-php@0.7.1" }
   ],
   "routes": [
+    { "src": "/logo.png", "dest": "/logo.png" },
     { "src": "/(.*)", "dest": "/index.php" }
   ]
 }
